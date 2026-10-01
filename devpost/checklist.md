@@ -49,7 +49,7 @@ Build mode: fast
   Learner check: Filter to failures, export, open the downloaded file.
   Commit: `Add filters, search, and Markdown export`
 
-- [ ] **5. Empty and edge states, final polish**
+- [x] **5. Empty and edge states, final polish**
   Becomes usable: First-run invitation, "No records match" state, clipboard-unavailable fallback wording, agent-name datalist learning.
   Why now: Last — these guard the demo and first impressions without touching proven behavior.
   PRD ref: `prd.md > States and Boundaries`
@@ -61,12 +61,12 @@ Build mode: fast
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — after slice 1 (form + list + styling) — feedback folded into slice 3 accent contrast
-- [ ] Final kick-the-tires exploration and feedback completed
+- [x] Early usable behavior explored — after slice 1 (form + list + styling) — feedback folded into slice 3 accent contrast
+- [x] Final kick-the-tires exploration and feedback completed
 
 ## Final Review
 
-- [ ] Final review complete — feedback resolved and learner confirms ready to ship
+- [x] Final review complete — feedback resolved and learner confirms ready to ship
 
 ## Code Tour and App Map
 
@@ -81,5 +81,7 @@ Reflection: offered; declined — learner connected the investigation to their g
 Activity mode: focused alternative (uncertainty investigation), per `5-build` guidance for familiar plan-first users.
 
 ## Revisions
+
+- [Empty states, no-match message, export fallback hint, and agent datalist landed inside slices 1 and 4 rather than in a separate slice-5 pass] — [the form and render code already had the records and the DOM hooks, so building the states in place was simpler than revisiting; slice 5 became verification-only, 4/4 checks].
 
 - [Agent-name datalist moved from slice 5 polish into RecordForm during slice 1] — [the form already knew the stored records, so populating the datalist there was simpler than a separate pass; no behavior change].
