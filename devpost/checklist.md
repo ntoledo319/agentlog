@@ -9,7 +9,7 @@ Build mode: fast
 
 ## Slices
 
-- [ ] **1. Log a record and see it in the list**
+- [x] **1. Log a record and see it in the list**
   Becomes usable: A runnable page where filling the form and hitting "Log it" shows the record as a card, with the bench-tool styling in place. In-memory only.
   Why now: Proves the whole path end to end on the first slice — page, form, state, render, styling — so every later slice has somewhere to land. Also resolves the spec's open investigation: localStorage/clipboard behavior on `file://` vs `http://`.
   PRD ref: `prd.md > Logging a record`, `prd.md > Look and Feel`
