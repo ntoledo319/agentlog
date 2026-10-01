@@ -204,6 +204,64 @@ els.form.addEventListener("submit", (e) => {
   render();
 });
 
+/* Exporter — the full (unfiltered) log as a Markdown document. */
+function toMarkdown(recs) {
+  const lines = [
+    "# agentlog export",
+    "",
+    `_generated ${new Date().toISOString().slice(0, 10)} · ${recs.length} record${recs.length === 1 ? "" : "s"}_`,
+    "",
+  ];
+  for (const r of recs) {
+    lines.push(`## ${fmtDate(r.ts)} — ${r.ask}`);
+    lines.push("");
+    lines.push(`- **outcome:** ${r.outcome}`);
+    lines.push(`- **agent:** ${r.agent}`);
+    lines.push(`- **lesson:** ${r.lesson}`);
+    if (r.tags.length) lines.push(`- **tags:** ${r.tags.join(", ")}`);
+    lines.push("");
+  }
+  return lines.join("\n");
+}
+
+els.exportBtn.addEventListener("click", async () => {
+  const md = toMarkdown(records);
+  const blob = new Blob([md], { type: "text/markdown" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "agentlog-export.md";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  let copied = false;
+  try {
+    await navigator.clipboard.writeText(md);
+    copied = true;
+  } catch {
+    copied = false;
+  }
+  els.exportHint.textContent = copied
+    ? `exported ${records.length} record${records.length === 1 ? "" : "s"} — downloaded and copied to clipboard`
+    : `exported ${records.length} record${records.length === 1 ? "" : "s"} — downloaded (clipboard unavailable here)`;
+  els.exportHint.hidden = false;
+  setTimeout(() => {
+    els.exportHint.hidden = true;
+  }, 4000);
+});
+
+/* filters */
+els.filterOutcome.addEventListener("click", (e) => {
+  const btn = e.target.closest(".fpill");
+  if (!btn) return;
+  filter.outcome = btn.dataset.outcome;
+  for (const b of els.filterOutcome.querySelectorAll(".fpill")) b.classList.toggle("active", b === btn);
+  renderList();
+});
+
+els.search.addEventListener("input", () => {
+  filter.q = els.search.value;
+  renderList();
+});
+
 /* boot */
 records = load();
 render();
