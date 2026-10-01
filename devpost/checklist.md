@@ -70,9 +70,9 @@ Build mode: fast
 
 ## Code Tour and App Map
 
-- [ ] Learning activity complete — focused alternative (experienced plan-first user): the spec's open uncertainty (file:// vs http:// storage/clipboard behavior) was investigated with real evidence during slice-1 verification
-- [ ] Optional edit and transfer reflection addressed — declined; verification already hands-on
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+- [x] Learning activity complete — focused alternative (experienced plan-first user): the spec's open uncertainty (file:// vs http:// storage/clipboard behavior) was investigated with real evidence during slice-1 verification
+- [x] Optional edit and transfer reflection addressed — declined; verification already hands-on
+- [x] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
 
 Activity and evidence: file:// vs http:// investigation — slice 1 verified form submit + render on both origins (http://127.0.0.1:8325 and file://); slice 2 verified localStorage round-trip on both; clipboard fallback verified on file:// (permission denied → download path + "downloaded" hint). Evidence: verification script `devpost/verify_app.py` output in session log.
 Route and stops: app.js: submit handler → Store.save → render → Insights.computeInsights (2–3 stops walked during verification debugging).
