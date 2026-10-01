@@ -19,7 +19,7 @@ Build mode: fast
   Learner check: Open the page, log a record, and confirm it appears and looks like the bench tool pictured.
   Commit: `Add record form and live log list`
 
-- [ ] **2. Records survive a reload**
+- [x] **2. Records survive a reload**
   Becomes usable: Records written before closing the tab are still there when it reopens.
   Why now: Persistence is the first place the data model can be wrong, and finding out now is cheap.
   PRD ref: `prd.md > States and Boundaries` (persistence)
