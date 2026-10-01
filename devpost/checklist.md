@@ -29,7 +29,7 @@ Build mode: fast
   Learner check: Add a record, reload, confirm it's still there.
   Commit: `Persist records to localStorage`
 
-- [ ] **3. Insights strip reads the log back to you (kernel)**
+- [x] **3. Insights strip reads the log back to you (kernel)**
   Becomes usable: The top strip shows total, per-outcome counts, and the top failure tag, updating the instant a record lands.
   Why now: The unique kernel comes early, not last — this is the thing that makes agentlog not-a-diary.
   PRD ref: `prd.md > Insights strip (the kernel)`
