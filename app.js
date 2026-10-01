@@ -26,6 +26,48 @@ const els = {
 let records = [];
 const filter = { outcome: "all", q: "" };
 
+/* Store — load/save around localStorage key "agentlog.records".
+   Missing, unparsable, or malformed data degrades to an empty list. */
+const STORE_KEY = "agentlog.records";
+
+function isWellFormed(r) {
+  return (
+    r &&
+    typeof r === "object" &&
+    typeof r.id === "string" &&
+    typeof r.ts === "number" &&
+    typeof r.ask === "string" &&
+    typeof r.lesson === "string" &&
+    ["shipped", "partial", "failed"].includes(r.outcome) &&
+    Array.isArray(r.tags)
+  );
+}
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(isWellFormed);
+  } catch {
+    return [];
+  }
+}
+
+let saveFailed = false;
+function save() {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify(records));
+  } catch {
+    if (!saveFailed) {
+      saveFailed = true;
+      els.hint.textContent = "browser storage is unavailable — records will last only until this tab closes; use Export Markdown";
+      els.hint.hidden = false;
+    }
+  }
+}
+
 function makeRecord(fields) {
   return {
     id: "rk_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
@@ -123,7 +165,12 @@ els.form.addEventListener("submit", (e) => {
       tags: parseTags(els.tags.value),
     })
   );
+  save();
   els.form.reset();
   els.ask.focus();
   render();
 });
+
+/* boot */
+records = load();
+render();
