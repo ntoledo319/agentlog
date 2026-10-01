@@ -39,7 +39,7 @@ Build mode: fast
   Learner check: Log a failed record with a tag and watch the strip name the pattern.
   Commit: `Add live insights strip with failure-pattern read-back`
 
-- [ ] **4. Filter, search, and Markdown export**
+- [x] **4. Filter, search, and Markdown export**
   Becomes usable: Outcome pills and text search narrow the log; Export downloads `agentlog-export.md` and copies the same Markdown to the clipboard.
   Why now: Read-back completes the core loop — the log becomes usable outside the app.
   PRD ref: `prd.md > Filter and search`, `prd.md > Export to Markdown`
