@@ -140,9 +140,42 @@ function renderAgentNames() {
   els.agentNames.innerHTML = names.map((n) => `<option value="${esc(n)}">`).join("");
 }
 
+function computeInsights(recs) {
+  const counts = { shipped: 0, partial: 0, failed: 0 };
+  const failTags = new Map();
+  for (const r of recs) {
+    counts[r.outcome] = (counts[r.outcome] || 0) + 1;
+    if (r.outcome === "failed") {
+      for (const t of r.tags) failTags.set(t, (failTags.get(t) || 0) + 1);
+    }
+  }
+  let topFailureTag = null;
+  let topCount = 0;
+  for (const [tag, n] of failTags) {
+    if (n > topCount) {
+      topFailureTag = tag;
+      topCount = n;
+    }
+  }
+  return { total: recs.length, ...counts, topFailureTag, topFailureCount: topCount };
+}
+
+function renderInsights() {
+  const s = computeInsights(records);
+  els.statTotal.textContent = String(s.total);
+  els.statMix.textContent = `${s.shipped} shipped · ${s.partial} partial · ${s.failed} failed`;
+  els.statFailure.textContent =
+    s.failed === 0
+      ? "no failures logged yet"
+      : s.topFailureTag
+        ? `${s.topFailureTag} ×${s.topFailureCount} of ${s.failed} failed`
+        : `${s.failed} failed · no tags yet`;
+}
+
 function render() {
   renderList();
   renderAgentNames();
+  renderInsights();
 }
 
 els.form.addEventListener("submit", (e) => {
