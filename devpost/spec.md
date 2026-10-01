@@ -111,5 +111,5 @@ None. No APIs, no databases, no hosting, no keys, no cost.
 
 - **No framework (learner choice)** — one local page doesn't earn one; accepted tradeoff is manual DOM rendering.
 - **localStorage (learner choice)** — zero-setup persistence; accepted tradeoff is browser-bound data, mitigated by Markdown export.
-- **Genuine uncertainty discussed:** whether `localStorage` and clipboard behave the same from `file://` as from `http://localhost` in Chromium. Agreed small investigation: the build's first slice is verified on *both* origins in headless Chromium; if `file://` storage misbehaves, the README will lead with the `http.server` instruction. Evidence lands in the slice-1 verification.
+- **Genuine uncertainty discussed:** whether `localStorage` and clipboard behave the same from `file://` as from `http://localhost` in Chromium. Agreed small investigation: the build's first slice is verified on *both* origins in headless Chromium; if `file://` storage misbehaves, the README will lead with the `http.server` instruction. Evidence landed in slice-1 verification: form submit + render passed on both origins, and slice 2 confirmed localStorage round-trips on both; clipboard write is denied on file:// and the fallback path (download + "downloaded" hint) works.
 - No open issues carried from `prd.md > Open Questions`.
