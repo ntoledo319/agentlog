@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agentlog — lab notebook for AI coding-agent sessions</title>
+<meta name="description" content="Log what you asked your coding agent, how it went, and what you learned — then see your recurring failure patterns.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="wrap">
+
+  <header class="masthead">
+    <h1>agentlog</h1>
+    <p class="tagline">a lab notebook for AI coding-agent sessions</p>
+  </header>
+
+  <section id="insights" class="insights" aria-label="insights">
+    <div class="stat"><span class="stat-num" id="stat-total">0</span><span class="stat-label">records</span></div>
+    <div class="stat"><span class="stat-num" id="stat-mix">0 shipped · 0 partial · 0 failed</span><span class="stat-label">outcome mix</span></div>
+    <div class="stat"><span class="stat-num" id="stat-failure">no failures logged yet</span><span class="stat-label">top failure pattern</span></div>
+  </section>
+
+  <section class="panel" aria-label="log a record">
+    <form id="record-form" autocomplete="off">
+      <div class="row">
+        <input id="f-ask" type="text" placeholder="What did you ask the agent to do?" maxlength="200">
+        <input id="f-agent" type="text" list="agent-names" placeholder="Agent (e.g. Kimi Code)" maxlength="60">
+        <datalist id="agent-names"></datalist>
+        <div class="seg" role="radiogroup" aria-label="outcome">
+          <label><input type="radio" name="outcome" value="shipped" checked><span class="pill shipped">shipped</span></label>
+          <label><input type="radio" name="outcome" value="partial"><span class="pill partial">partial</span></label>
+          <label><input type="radio" name="outcome" value="failed"><span class="pill failed">failed</span></label>
+        </div>
+      </div>
+      <div class="row">
+        <input id="f-lesson" type="text" placeholder="Lesson learned, in one sentence" maxlength="300">
+        <input id="f-tags" type="text" placeholder="tags, comma, separated" maxlength="120">
+        <button type="submit" id="log-btn">Log it</button>
+      </div>
+      <p id="form-hint" class="hint" hidden></p>
+    </form>
+  </section>
+
+  <section class="panel" aria-label="the log">
+    <div class="filters">
+      <div class="seg" id="filter-outcome" role="group" aria-label="filter by outcome">
+        <button type="button" class="fpill active" data-outcome="all">all</button>
+        <button type="button" class="fpill shipped" data-outcome="shipped">shipped</button>
+        <button type="button" class="fpill partial" data-outcome="partial">partial</button>
+        <button type="button" class="fpill failed" data-outcome="failed">failed</button>
+      </div>
+      <input id="f-search" type="search" placeholder="search ask, lesson, agent, tags">
+      <button type="button" id="export-btn">Export Markdown</button>
+    </div>
+    <p id="export-hint" class="hint" hidden></p>
+    <ol id="log-list" class="log" reversed></ol>
+    <p id="empty-state" class="empty">No sessions logged yet — add your first record above.</p>
+    <p id="nomatch-state" class="empty" hidden>No records match.</p>
+  </section>
+
+  <footer class="foot">
+    <p>local-first · your records stay in this browser · export anytime</p>
+  </footer>
+
+</main>
+<script src="app.js"></script>
+</body>
+</html>
