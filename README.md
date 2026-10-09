@@ -10,7 +10,9 @@ If you work with a coding agent every day, the sessions blur together and the le
 
 ## Run it
 
-No install, no build step, no keys, no network:
+**Try it live (no install): <https://ntoledo319.github.io/agentlog/>** — the same static app, served by GitHub Pages; your records stay in your own browser.
+
+Or locally — no install, no build step, no keys, no network:
 
 - double-click `index.html`, **or**
 - `python3 -m http.server 8000` in this folder and open <http://localhost:8000>
